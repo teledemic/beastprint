@@ -1,5 +1,6 @@
 <template>
   <div class="beast-card">
+    <div class="floating-cr">{{beast.cr}}</div>
     <div class="creature-name">{{beast.name}}</div>
     <div class="creature-type">{{beast.size | creatureSize}} beast, {{beast.alignment}}</div>
     <div class="divider"></div>
@@ -140,6 +141,19 @@ export default class Beast extends Vue {
   padding: 20px;
   break-inside: avoid;
   page-break-inside: avoid;
+  position: relative;
+}
+.floating-cr {
+  position: absolute;
+  right: 0;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  vertical-align: middle;
+  background-color: black;
+  color: white;
+  font-size: 40px;
+  font-family: "MrEaves";
 }
 .divider {
   max-width: 100%;
