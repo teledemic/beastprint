@@ -49,7 +49,6 @@ export default class App extends Vue {
       }
       beast.trait = beast.trait.filter(item => item.name !== "Source");
     }
-    console.log(beasts);
     this.beasts = beasts.slice(0, 12);
   }
   public async loadXML(file: File): Promise<any> {
@@ -97,44 +96,8 @@ export default class App extends Vue {
   src: url("assets/Mr Eaves Small Caps.otf");
 }
 @font-face {
-  font-family: "Bookinsanity";
-  src: url("assets/Bookinsanity.otf");
-}
-@font-face {
-  font-family: "Bookinsanity";
-  src: url("assets/Bookinsanity Italic.otf");
-  font-style: italic, oblique;
-}
-@font-face {
-  font-family: "Bookinsanity";
-  src: url("assets/Bookinsanity Bold.otf");
-  font-weight: bold;
-}
-@font-face {
-  font-family: "Bookinsanity";
-  src: url("assets/Bookinsanity Bold Italic.otf");
-  font-weight: bold;
-  font-style: italic, oblique;
-}
-@font-face {
   font-family: "ScalySans";
   src: url("assets/Scaly Sans.otf");
   font-style: normal;
 }
-/* @font-face {
-  font-family: "ScalySans";
-  src: url("assets/Scaly Sans Italic.otf");
-  font-style: italic, oblique;
-}
-@font-face {
-  font-family: "ScalySans";
-  src: url("assets/Scaly Sans Bold.otf");
-  font-weight: bold;
-}
-@font-face {
-  font-family: "ScalySans";
-  src: url("assets/Scaly Sans Bold Italic.otf");
-  font-weight: bold;
-  font-style: italic, oblique;
-} */
 </style>
