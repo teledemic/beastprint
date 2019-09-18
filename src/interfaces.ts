@@ -27,6 +27,7 @@ export interface Monster {
 interface Trait {
   name: string;
   text: string;
+  type?: string;
 }
 
 export function ForceArray(obj: any, property: string) {

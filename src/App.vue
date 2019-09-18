@@ -34,6 +34,11 @@ export default class App extends Vue {
     for (const beast of beasts) {
       ForceArray(beast, "action");
       ForceArray(beast, "trait");
+      for (const action of beast.action) {
+        const attack = action.text.indexOf("Attack:");
+        action.type = action.text.slice(0, attack + 7);
+        action.text = action.text.slice(attack + 7, action.text.length);
+      }
     }
     console.log(beasts);
     this.beasts = beasts;

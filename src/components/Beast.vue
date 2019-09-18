@@ -84,6 +84,7 @@
     <div class="action-header">Actions</div>
     <div v-for="action of beast.action" :key="action.name" class="trait">
       <span class="heading">{{action.name}}.</span>
+      <span class="attack-type">&nbsp;{{action.type}}</span>
       {{action.text}}
     </div>
   </div>
@@ -188,5 +189,8 @@ export default class Beast extends Vue {
   font-size: 24px;
   border-bottom: 1px black solid;
   margin: 10px 0;
+}
+.attack-type {
+  font-style: italic;
 }
 </style>
