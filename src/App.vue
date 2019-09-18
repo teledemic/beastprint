@@ -1,10 +1,16 @@
 <template>
   <div id="app">
-    <div v-if="!beasts.length">
+    <div v-if="!allBeasts.length">
       <input type="file" accept="text/xml" multiple @change="filesChange($event.target.files)" />
     </div>
-    <div v-if="beasts" class="beast-list">
-      <Beast v-for="beast of beasts" :key="beast.name" :beast="beast" />
+    <div v-if="allBeasts.length && !printBeasts.length">
+      <select v-model="selectedBeasts" multiple class="beast-select">
+        <option v-for="beast of allBeasts" :key="beast.name" :value="beast">{{beast.name}}</option>
+      </select>
+      <button @click="selectBeasts">Print beasts</button>
+    </div>
+    <div v-if="printBeasts" class="beast-list">
+      <Beast v-for="beast of printBeasts" :key="beast.name" :beast="beast" />
     </div>
   </div>
 </template>
@@ -22,7 +28,9 @@ import { Monster, ForceArray } from "./interfaces";
   }
 })
 export default class App extends Vue {
-  private beasts: Monster[] = [];
+  private allBeasts: Monster[] = [];
+  private selectedBeasts: Monster[] = [];
+  private printBeasts: Monster[] = [];
 
   public async filesChange(fileList: FileList) {
     const files = Array.from(fileList);
@@ -49,7 +57,10 @@ export default class App extends Vue {
       }
       beast.trait = beast.trait.filter(item => item.name !== "Source");
     }
-    this.beasts = beasts.slice(0, 12);
+    this.allBeasts = beasts;
+  }
+  public selectBeasts() {
+    this.printBeasts = this.selectedBeasts;
   }
   public async loadXML(file: File): Promise<any> {
     const xml: string = await new Promise((resolve, reject) => {

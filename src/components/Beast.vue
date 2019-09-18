@@ -81,7 +81,7 @@
       <span class="heading">{{trait.name}}.</span>
       {{trait.text}}
     </div>
-    <div v-if="beast.action.length">
+    <div v-if="beast.action && beast.action.length">
       <div class="action-header">Actions</div>
       <div v-for="action of beast.action" :key="action.name" class="trait">
         <span class="heading">{{action.name}}.</span>
@@ -126,7 +126,7 @@ import { Monster } from "../interfaces";
   }
 })
 export default class Beast extends Vue {
-  @Prop() private beast!: Monster;
+  @Prop() public beast!: Monster;
 }
 </script>
 
