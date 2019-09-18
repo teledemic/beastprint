@@ -2,7 +2,7 @@
   <div class="beast-card">
     <div class="creature-name">{{beast.name}}</div>
     <div class="creature-type">{{beast.size | creatureSize}} beast, {{beast.alignment}}</div>
-    <hr />
+    <div class="divider"></div>
     <div class="attribute">
       <span class="heading">Armor Class</span>
       {{beast.ac}}
@@ -15,7 +15,7 @@
       <span class="heading">Speed</span>
       {{beast.speed}}
     </div>
-    <hr />
+    <div class="divider"></div>
     <div class="stats">
       <div class="stat">
         <div class="name">STR</div>
@@ -42,14 +42,30 @@
         <div class="value">{{beast.cha | attribute}}</div>
       </div>
     </div>
-    <hr />
+    <div class="divider"></div>
+    <div v-if="beast.save" class="attribute">
+      <span class="heading">Saving Throws</span>
+      {{beast.save}}
+    </div>
     <div v-if="beast.skill" class="attribute">
       <span class="heading">Skills</span>
       {{beast.skill}}
     </div>
+    <div v-if="beast.resist" class="attribute">
+      <span class="heading">Damage Resistances</span>
+      {{beast.resist}}
+    </div>
+    <div v-if="beast.immune" class="attribute">
+      <span class="heading">Damage Immunities</span>
+      {{beast.immune}}
+    </div>
+    <div v-if="beast.conditionImmune" class="attribute">
+      <span class="heading">Condition Immunities</span>
+      {{beast.conditionImmune}}
+    </div>
     <div class="attribute">
       <span class="heading">Senses</span>
-      <span v-if="beast.senses"> {{beast.senses}},</span>
+      <span v-if="beast.senses">&nbsp;{{beast.senses}},</span>
       passive perception {{beast.passive}}
     </div>
     <div class="attribute">
@@ -58,7 +74,17 @@
     </div>
     <div class="attribute">
       <span class="heading">Challenge</span>
-      {{beast.speed}}
+      {{beast.cr}}
+    </div>
+    <div class="divider"></div>
+    <div v-for="trait of beast.trait" :key="trait.name" class="trait">
+      <span class="heading">{{trait.name}}.</span>
+      {{trait.text}}
+    </div>
+    <div class="action-header">Actions</div>
+    <div v-for="action of beast.action" :key="action.name" class="trait">
+      <span class="heading">{{action.name}}.</span>
+      {{action.text}}
     </div>
   </div>
 </template>
@@ -106,9 +132,16 @@ export default class Beast extends Vue {
   font-style: normal;
   width: 400px;
   font-size: 15px;
-  line-height: 1.1;
   color: black;
   padding: 20px;
+}
+.divider {
+  max-width: 100%;
+  min-height: 5px;
+  background-image: url(../assets/divider.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 10px 0;
 }
 .creature-name {
   font-family: "MrEaves";
@@ -122,7 +155,6 @@ export default class Beast extends Vue {
 }
 .attribute {
   color: #822000;
-  line-height: 1.2;
   margin: 5px 0;
 }
 .attribute .heading {
@@ -137,7 +169,24 @@ export default class Beast extends Vue {
 .stats .stat {
   text-align: center;
 }
+.stats .stat.override {
+  opacity: 0.5;
+}
 .stats .stat .name {
   font-weight: bold;
+}
+.trait {
+  margin: 5px 0;
+}
+.trait .heading {
+  font-weight: bold;
+  font-style: italic;
+}
+.action-header {
+  font-variant-caps: small-caps;
+  color: #822000;
+  font-size: 24px;
+  border-bottom: 1px black solid;
+  margin: 10px 0;
 }
 </style>

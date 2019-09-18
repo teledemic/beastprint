@@ -1,17 +1,30 @@
 export interface Monster {
+  type: string;
   name: string;
   size: string;
   alignment: string;
   ac: string;
-  type: string;
-  action: Action[];
-  skill: string;
-  senses: string;
-  languages: string;
+  hp: string;
+  speed: string;
+  str: string;
+  dex: string;
+  con: string;
+  int: string;
+  wis: string;
+  cha: string;
+  save?: string;
+  skill?: string;
+  resist?: string;
+  conditionImmune?: string;
+  immune?: string;
+  senses?: string;
+  passive: string;
+  languages?: string;
+  action: Trait[];
+  trait: Trait[];
 }
 
-interface Action {
-  attack: string;
+interface Trait {
   name: string;
   text: string;
 }

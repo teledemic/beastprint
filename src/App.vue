@@ -30,9 +30,10 @@ export default class App extends Vue {
       monsters = monsters.concat(source.compendium.monster);
     }
     const beasts = monsters.filter(item => item.type.startsWith("beast"));
+    // || (item.type.startsWith("swarm") && item.type.includes("beasts"))
     for (const beast of beasts) {
       ForceArray(beast, "action");
-      console.log(beast.languages);
+      ForceArray(beast, "trait");
     }
     console.log(beasts);
     this.beasts = beasts;
