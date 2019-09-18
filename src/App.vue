@@ -35,12 +35,14 @@ export default class App extends Vue {
       ForceArray(beast, "action");
       ForceArray(beast, "trait");
       for (const action of beast.action) {
-        const attack = action.text.indexOf("Attack:");
+        ForceArray(action, "text");
+        const attack = action.text[0].indexOf("Attack:");
         if (attack >= 0) {
-          action.type = action.text.slice(0, attack + 7);
-          action.text = action.text.slice(attack + 7, action.text.length);
+          action.type = action.text[0].slice(0, attack + 7);
+          action.text[0] = action.text[0].slice(attack + 7, action.text[0].length);
         }
       }
+      beast.trait = beast.trait.filter(item => item.name !== "Source");
     }
     console.log(beasts);
     this.beasts = beasts;

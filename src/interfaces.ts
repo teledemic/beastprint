@@ -26,7 +26,7 @@ export interface Monster {
 
 interface Trait {
   name: string;
-  text: string;
+  text: string[];
   type?: string;
 }
 

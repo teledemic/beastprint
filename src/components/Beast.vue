@@ -81,11 +81,14 @@
       <span class="heading">{{trait.name}}.</span>
       {{trait.text}}
     </div>
-    <div class="action-header">Actions</div>
-    <div v-for="action of beast.action" :key="action.name" class="trait">
-      <span class="heading">{{action.name}}.</span>
-      <span v-if="action.type" class="attack-type">&nbsp;{{action.type}}</span>
-      {{action.text}}
+    <div v-if="beast.action.length">
+      <div class="action-header">Actions</div>
+      <div v-for="action of beast.action" :key="action.name" class="trait">
+        <span class="heading">{{action.name}}.</span>
+        <span v-if="action.type" class="attack-type">&nbsp;{{action.type}}</span>
+        {{action.text[0]}}
+        <div v-for="text of action.text.slice(1)" :key="text" class="action-extra">{{text}}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -146,7 +149,7 @@ export default class Beast extends Vue {
 }
 .creature-name {
   font-family: "MrEaves";
-  color: #822000;
+  /* color: #822000; */
   font-weight: bold;
   font-size: 34px;
 }
@@ -155,7 +158,7 @@ export default class Beast extends Vue {
   margin-bottom: 15px;
 }
 .attribute {
-  color: #822000;
+  /* color: #822000; */
   margin: 5px 0;
 }
 .attribute .heading {
@@ -163,7 +166,7 @@ export default class Beast extends Vue {
 }
 .stats {
   display: flex;
-  color: #822000;
+  /* color: #822000; */
   justify-content: space-evenly;
   font-size: 14px;
 }
@@ -178,6 +181,7 @@ export default class Beast extends Vue {
 }
 .trait {
   margin: 5px 0;
+  line-height: 1.1;
 }
 .trait .heading {
   font-weight: bold;
@@ -185,12 +189,16 @@ export default class Beast extends Vue {
 }
 .action-header {
   font-variant-caps: small-caps;
-  color: #822000;
+  /* color: #822000; */
   font-size: 24px;
   border-bottom: 1px black solid;
   margin: 10px 0;
 }
 .attack-type {
   font-style: italic;
+}
+.action-extra {
+  margin-top: 5px;
+  text-indent: 20px;
 }
 </style>
