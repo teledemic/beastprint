@@ -16,6 +16,8 @@
     "ordered-imports": false,
     "quotemark": [true, "double"],
     "max-line-length": [true, 180],
-    "no-console": false
+    "no-console": false,
+    "trailing-comma": false,
+    "arrow-parens": false
   }
 }
