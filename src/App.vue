@@ -12,7 +12,7 @@ import * as xml2js from "xml2js";
 import { Component, Vue } from "vue-property-decorator";
 
 import Beast from "./components/Beast.vue";
-import { Monster } from "./interfaces";
+import { Monster, ForceArray } from "./interfaces";
 
 @Component({
   components: {
@@ -29,8 +29,13 @@ export default class App extends Vue {
     for (const source of parsed) {
       monsters = monsters.concat(source.compendium.monster);
     }
-    this.beasts = monsters.filter(item => item.type.startsWith("beast"));
-    console.log(this.beasts);
+    const beasts = monsters.filter(item => item.type.startsWith("beast"));
+    for (const beast of beasts) {
+      ForceArray(beast, "action");
+      console.log(beast.languages);
+    }
+    console.log(beasts);
+    this.beasts = beasts;
   }
   public async loadXML(file: File): Promise<any> {
     const xml: string = await new Promise((resolve, reject) => {
@@ -98,7 +103,7 @@ export default class App extends Vue {
   src: url("assets/Scaly Sans.otf");
   font-style: normal;
 }
-@font-face {
+/* @font-face {
   font-family: "ScalySans";
   src: url("assets/Scaly Sans Italic.otf");
   font-style: italic, oblique;
@@ -113,5 +118,5 @@ export default class App extends Vue {
   src: url("assets/Scaly Sans Bold Italic.otf");
   font-weight: bold;
   font-style: italic, oblique;
-}
+} */
 </style>
