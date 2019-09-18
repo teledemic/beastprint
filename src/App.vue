@@ -5,7 +5,7 @@
     </div>
     <div v-if="allBeasts.length && !printBeasts.length">
       <select v-model="selectedBeasts" multiple class="beast-select">
-        <option v-for="beast of allBeasts" :key="beast.name" :value="beast">{{beast.name}}</option>
+        <option v-for="beast of allBeasts" :key="beast.name" :value="beast">{{beast.name}} (CR {{beast.cr}})</option>
       </select>
       <button @click="selectBeasts">Print beasts</button>
     </div>
@@ -97,6 +97,10 @@ export default class App extends Vue {
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
   color: black;
+}
+.beast-select {
+  height: 600px;
+  width: 200px;
 }
 .beast-list {
   display: flex;
