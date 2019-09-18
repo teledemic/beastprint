@@ -117,7 +117,7 @@ import { Monster } from "../interfaces";
     },
     attribute: (value: string) => {
       const val = Number(value);
-      const modifier = Math.round((10 - val) / 2);
+      const modifier = Math.floor((val - 10) / 2);
       return value + " (" + (modifier < 0 ? "" : "+") + modifier + ")";
     }
   }
