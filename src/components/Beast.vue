@@ -134,10 +134,12 @@ export default class Beast extends Vue {
 <style scoped>
 .beast-card {
   font-style: normal;
-  width: 400px;
+  width: 360px;
   font-size: 15px;
   color: black;
   padding: 20px;
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 .divider {
   max-width: 100%;

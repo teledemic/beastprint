@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <input type="file" accept="text/xml" multiple @change="filesChange($event.target.files)" />
-    <div v-if="beasts">
+    <div v-if="!beasts.length">
+      <input type="file" accept="text/xml" multiple @change="filesChange($event.target.files)" />
+    </div>
+    <div v-if="beasts" class="beast-list">
       <Beast v-for="beast of beasts" :key="beast.name" :beast="beast" />
     </div>
   </div>
@@ -39,13 +41,16 @@ export default class App extends Vue {
         const attack = action.text[0].indexOf("Attack:");
         if (attack >= 0) {
           action.type = action.text[0].slice(0, attack + 7);
-          action.text[0] = action.text[0].slice(attack + 7, action.text[0].length);
+          action.text[0] = action.text[0].slice(
+            attack + 7,
+            action.text[0].length
+          );
         }
       }
       beast.trait = beast.trait.filter(item => item.name !== "Source");
     }
     console.log(beasts);
-    this.beasts = beasts;
+    this.beasts = beasts.slice(0, 12);
   }
   public async loadXML(file: File): Promise<any> {
     const xml: string = await new Promise((resolve, reject) => {
@@ -81,8 +86,11 @@ export default class App extends Vue {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: black;
+}
+.beast-list {
+  display: flex;
+  flex-wrap: wrap;
 }
 @font-face {
   font-family: "MrEaves";
