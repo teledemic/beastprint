@@ -84,7 +84,7 @@
     <div class="action-header">Actions</div>
     <div v-for="action of beast.action" :key="action.name" class="trait">
       <span class="heading">{{action.name}}.</span>
-      <span class="attack-type">&nbsp;{{action.type}}</span>
+      <span v-if="action.type" class="attack-type">&nbsp;{{action.type}}</span>
       {{action.text}}
     </div>
   </div>
