@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <!-- <MagicItem></MagicItem> -->
     <div v-if="!allBeasts.length">
       <input type="file" accept="text/xml" multiple @change="filesChange($event.target.files)" />
     </div>
@@ -20,11 +21,13 @@ import * as xml2js from "xml2js";
 import { Component, Vue } from "vue-property-decorator";
 
 import Beast from "./components/Beast.vue";
+import MagicItem from "./components/MagicItem.vue";
 import { Monster, ForceArray } from "./interfaces";
 
 @Component({
   components: {
-    Beast
+    Beast,
+    MagicItem
   }
 })
 export default class App extends Vue {
