@@ -22,6 +22,7 @@ export interface Monster {
   languages?: string;
   action: Trait[];
   trait: Trait[];
+  cr: number;
 }
 
 interface Trait {

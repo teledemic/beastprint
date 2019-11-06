@@ -43,6 +43,7 @@ export default class App extends Vue {
       monsters = monsters.concat(source.compendium.monster);
     }
     const beasts = monsters.filter(item => item.type.startsWith("beast"));
+    // const beasts = monsters.filter(item => item.type.includes("demon") && item.cr >= 4 && item.cr <= 4);
     // || (item.type.startsWith("swarm") && item.type.includes("beasts"))
     for (const beast of beasts) {
       ForceArray(beast, "action");
