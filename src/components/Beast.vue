@@ -2,7 +2,7 @@
   <div class="beast-card">
     <div class="floating-cr">{{beast.cr}}</div>
     <div class="creature-name">{{beast.name}}</div>
-    <div class="creature-type">{{beast.size | creatureSize}} beast, {{beast.alignment}}</div>
+    <div class="creature-type">{{beast.size | creatureSize}} {{beast.type}}, {{beast.alignment}}</div>
     <div class="divider"></div>
     <div class="attribute">
       <span class="heading">Armor Class</span>
@@ -30,15 +30,15 @@
         <div class="name">CON</div>
         <div class="value">{{beast.con | attribute}}</div>
       </div>
-      <div class="stat override">
+      <div class="stat" :class="{ override : hidebrain }">
         <div class="name">INT</div>
         <div class="value">{{beast.int | attribute}}</div>
       </div>
-      <div class="stat override">
+      <div class="stat" :class="{ override : hidebrain }">
         <div class="name">WIS</div>
         <div class="value">{{beast.wis | attribute}}</div>
       </div>
-      <div class="stat override">
+      <div class="stat" :class="{ override : hidebrain }">
         <div class="name">CHA</div>
         <div class="value">{{beast.cha | attribute}}</div>
       </div>
@@ -80,7 +80,8 @@
     <div class="divider"></div>
     <div v-for="trait of beast.trait" :key="trait.name" class="trait">
       <span class="heading">{{trait.name}}.</span>
-      {{trait.text}}
+      {{trait.text[0]}}
+      <div v-for="text of trait.text.slice(1)" :key="text" class="trait-extra">{{text}}</div>
     </div>
     <div v-if="beast.action && beast.action.length">
       <div class="action-header">Actions</div>
@@ -128,6 +129,7 @@ import { Monster } from "../interfaces";
 })
 export default class Beast extends Vue {
   @Prop() public beast!: Monster;
+  public hidebrain = true;
 }
 </script>
 
@@ -176,6 +178,8 @@ export default class Beast extends Vue {
 .attribute {
   /* color: #822000; */
   margin: 5px 0;
+  margin-left: 20px;
+  text-indent: -20px;
 }
 .attribute .heading {
   font-weight: bold;
@@ -216,5 +220,10 @@ export default class Beast extends Vue {
 .action-extra {
   margin-top: 5px;
   text-indent: 20px;
+}
+.trait-extra {
+  margin-top: 5px;
+  margin-left: 20px;
+  text-indent: -20px;
 }
 </style>

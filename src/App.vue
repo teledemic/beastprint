@@ -24,6 +24,8 @@ import Beast from "./components/Beast.vue";
 import MagicItem from "./components/MagicItem.vue";
 import { Monster, ForceArray } from "./interfaces";
 
+const IGNORE_VARIANT = true;
+
 @Component({
   components: {
     Beast,
@@ -43,11 +45,17 @@ export default class App extends Vue {
       monsters = monsters.concat(source.compendium.monster);
     }
     const beasts = monsters.filter(item => item.type.startsWith("beast"));
-    // const beasts = monsters.filter(item => item.type.includes("demon") && item.cr >= 4 && item.cr <= 4);
+    // const beasts = monsters.filter(item => item.type.includes("demon") && item.cr >= 4 && item.cr <= 6);
     // || (item.type.startsWith("swarm") && item.type.includes("beasts"))
     for (const beast of beasts) {
       ForceArray(beast, "action");
       ForceArray(beast, "trait");
+      for (const trait of beast.trait) {
+        ForceArray(trait, "text");
+      }
+      if (IGNORE_VARIANT) {
+        beast.action = beast.action.filter(item => !item.name.toLowerCase().startsWith("variant:"));
+      }
       for (const action of beast.action) {
         ForceArray(action, "text");
         const attack = action.text[0].indexOf("Attack:");
