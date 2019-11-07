@@ -6,7 +6,11 @@
     </div>
     <div v-if="allBeasts.length && !printBeasts.length">
       <select v-model="selectedBeasts" multiple class="beast-select">
-        <option v-for="beast of allBeasts" :key="beast.name" :value="beast">{{beast.name}} (CR {{beast.cr}})</option>
+        <option
+          v-for="beast of allBeasts"
+          :key="beast.name"
+          :value="beast"
+        >{{beast.name}} (CR {{beast.cr}})</option>
       </select>
       <button @click="selectBeasts">Print beasts</button>
     </div>
@@ -47,7 +51,7 @@ export default class App extends Vue {
     let beasts = monsters.filter(item => item.type.startsWith("beast"));
     // let beasts = monsters.filter(item => item.type.includes("demon") && item.cr >= 4 && item.cr <= 6);
     // || (item.type.startsWith("swarm") && item.type.includes("beasts"))
-    beasts = beasts.sort((a,b) => b.cr - a.cr);
+    beasts = beasts.sort((a, b) => b.cr - a.cr);
     for (const beast of beasts) {
       ForceArray(beast, "action");
       ForceArray(beast, "trait");
@@ -55,7 +59,9 @@ export default class App extends Vue {
         ForceArray(trait, "text");
       }
       if (IGNORE_VARIANT) {
-        beast.action = beast.action.filter(item => !item.name.toLowerCase().startsWith("variant:"));
+        beast.action = beast.action.filter(
+          item => !item.name.toLowerCase().startsWith("variant:")
+        );
       }
       for (const action of beast.action) {
         ForceArray(action, "text");
