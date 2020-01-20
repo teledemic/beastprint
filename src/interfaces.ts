@@ -21,6 +21,7 @@ export interface Monster {
   passive: string;
   languages?: string;
   action: Trait[];
+  legendary: Trait[];
   trait: Trait[];
   cr: number;
 }

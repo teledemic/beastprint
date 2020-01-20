@@ -49,11 +49,13 @@ export default class App extends Vue {
       monsters = monsters.concat(source.compendium.monster);
     }
     let beasts = monsters.filter(item => item.type.startsWith("beast"));
+    // let beasts = monsters;
     // let beasts = monsters.filter(item => item.type.includes("demon") && item.cr >= 4 && item.cr <= 6);
     // || (item.type.startsWith("swarm") && item.type.includes("beasts"))
     beasts = beasts.sort((a, b) => b.cr - a.cr);
     for (const beast of beasts) {
       ForceArray(beast, "action");
+      ForceArray(beast, "legendary");
       ForceArray(beast, "trait");
       for (const trait of beast.trait) {
         ForceArray(trait, "text");
@@ -73,6 +75,9 @@ export default class App extends Vue {
             action.text[0].length
           );
         }
+      }
+      for (const legendary of beast.legendary) {
+        ForceArray(legendary, "text");
       }
       beast.trait = beast.trait.filter(item => item.name !== "Source");
     }

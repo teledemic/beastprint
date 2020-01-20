@@ -92,6 +92,16 @@
         <div v-for="text of action.text.slice(1)" :key="text" class="action-extra">{{text}}</div>
       </div>
     </div>
+    <div v-if="beast.legendary && beast.legendary.length">
+      <div class="action-header">Legendary Actions</div>
+      <div>The creature can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature's turn. The creature regains spent legendary actions at the start of its turn.</div>
+      <div v-for="legendary of beast.legendary" :key="legendary.name" class="trait">
+        <span class="heading">{{legendary.name}}.</span>
+        <span v-if="legendary.type" class="attack-type">&nbsp;{{legendary.type}}</span>
+        {{legendary.text[0]}}
+        <div v-for="text of legendary.text.slice(1)" :key="text" class="action-extra">{{text}}</div>
+      </div>
+    </div>
   </div>
 </template>
 
